@@ -5,7 +5,7 @@ const { connectToDatabase } = require("../models/db");
 
 const upload = multer({ dest: "uploads/" });
 
-router.get("/api/secondchance/items", async (req, res) => {
+router.get("/items", async (req, res) => {
   try {
     const db = await connectToDatabase();
     const items = await db.collection("items").find({}).toArray();
@@ -15,7 +15,7 @@ router.get("/api/secondchance/items", async (req, res) => {
   }
 });
 
-router.get("/api/secondchance/items/:id", async (req, res) => {
+router.get("/items/:id", async (req, res) => {
   try {
     const db = await connectToDatabase();
     const item = await db.collection("items").findOne({ _id: req.params.id });
@@ -30,23 +30,26 @@ router.get("/api/secondchance/items/:id", async (req, res) => {
   }
 });
 
-router.post("/api/secondchance/items", upload.single("image"), async (req, res) => {
+router.post("/items", upload.single("image"), async (req, res) => {
   try {
     const db = await connectToDatabase();
     const item = {
-      ...req.body,
-      image: req.file ? req.file.filename : null,
+      _id: req.body._id || String(Date.now()),
+      name: req.body.name,
+      category: req.body.category,
+      description: req.body.description,
+      image: req.file ? req.file.filename : "",
       createdAt: new Date()
     };
 
     const result = await db.collection("items").insertOne(item);
-    res.status(201).json({ message: "Item created successfully", itemId: result.insertedId });
+    res.status(201).json({ message: "Item created successfully", itemId: result.insertedId || item._id });
   } catch (error) {
     res.status(500).json({ message: "Unable to create item.", error: error.message });
   }
 });
 
-router.delete("/api/secondchance/items/:id", async (req, res) => {
+router.delete("/items/:id", async (req, res) => {
   try {
     const db = await connectToDatabase();
     const result = await db.collection("items").deleteOne({ _id: req.params.id });

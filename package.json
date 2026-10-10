@@ -1,0 +1,21 @@
+{
+  "name": "secondchance-capstone",
+  "version": "1.0.0",
+  "description": "SecondChance capstone application backend and frontend",
+  "main": "secondChance-backend/server.js",
+  "scripts": {
+    "start": "node secondChance-backend/server.js",
+    "dev": "nodemon secondChance-backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0",
+    "multer": "^1.4.5-lts.1",
+    "natural": "^8.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

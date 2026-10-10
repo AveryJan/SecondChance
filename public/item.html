@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecondChance | Item Details</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="brand">SecondChance</div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/main">Browse</a>
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+      </div>
+      <div id="userBadge" class="user-badge">Guest</div>
+    </nav>
+
+    <main class="item-shell">
+      <div id="itemDetail" class="item-detail-card"></div>
+    </main>
+
+    <script src="/app.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        renderUserBadge();
+        loadItemDetails();
+      });
+    </script>
+  </body>
+</html>
